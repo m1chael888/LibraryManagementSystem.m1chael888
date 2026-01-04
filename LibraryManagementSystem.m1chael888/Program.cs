@@ -1,13 +1,12 @@
 ﻿using Spectre.Console;
 using System.Linq;
-
+//// m1chael888 \\\\
 namespace LibraryManagementSystem.m1chael888
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            var menuChoices = new string[4] { "View Books", "Add Book", "Delete Book", "Close app" };
             var books = new List<string>()
             {
                 "The Great Gatsby", "To Kill a Mockingbird", "1984", "Pride and Prejudice", "The Catcher in the Rye", "The Hobbit", "Moby-Dick", "War and Peace", "The Odyssey", "The Lord of the Rings", "Jane Eyre", "Animal Farm", "Brave New World", "The Chronicles of Narnia", "The Diary of a Young Girl", "The Alchemist", "Wuthering Heights", "Fahrenheit 451", "Catch-22", "The Hitchhiker's Guide to the Galaxy"
@@ -18,14 +17,14 @@ namespace LibraryManagementSystem.m1chael888
                 Console.Clear();
 
                 var choice = AnsiConsole.Prompt(
-                    new SelectionPrompt<string>()
+                    new SelectionPrompt<MenuOption>()
                     .Title("[blue]What do you want to do next?[/]")
-                    .AddChoices(menuChoices)
+                    .AddChoices(Enum.GetValues<MenuOption>())
                     .WrapAround(true));
 
                 switch (choice)
                 {
-                    case "View Books":
+                    case MenuOption.ViewBooks:
                         AnsiConsole.MarkupLine("[blue]List of Books:[/]\n");
 
                         foreach (var b in books)
@@ -36,7 +35,7 @@ namespace LibraryManagementSystem.m1chael888
                         AnsiConsole.MarkupLine("\nPress any key to return to menu...");
                         Console.ReadKey();
                         break;
-                    case "Add Book":
+                    case MenuOption.AddBook:
                         var title = AnsiConsole.Ask<string>("[blue]Enter the [white]title[/] of the book you want to add:[/]");
 
                         if (books.Contains(title))
@@ -52,7 +51,7 @@ namespace LibraryManagementSystem.m1chael888
                         AnsiConsole.MarkupLine("\nPress any key to return to menu...");
                         Console.ReadKey();
                         break;
-                    case "Delete Book":
+                    case MenuOption.DeleteBook:
                         if (books.Count() == 0)
                         {
                             AnsiConsole.MarkupLine("[red]There are no books to delete![/]");
@@ -67,7 +66,7 @@ namespace LibraryManagementSystem.m1chael888
                             .AddChoices(books)
                             .WrapAround(true)
                             .PageSize(25));
-                            
+
                         if (books.Remove(bookToDelete))
                         {
                             AnsiConsole.MarkupLine("[green]Book successfuly deleted![/] =)");
@@ -80,12 +79,20 @@ namespace LibraryManagementSystem.m1chael888
                         AnsiConsole.MarkupLine("\nPress any key to return to menu...");
                         Console.ReadKey();
                         break;
-                    case "Close app":
+                    case MenuOption.CloseApp:
                         AnsiConsole.MarkupLine("[blue]Goodbye[/] o/");
                         Environment.Exit(0);
                         break;
                 }
             }
         }
+
+        enum MenuOption
+        {
+            ViewBooks,
+            AddBook,
+            DeleteBook,
+            CloseApp
+        }
     }
-} 
+}
