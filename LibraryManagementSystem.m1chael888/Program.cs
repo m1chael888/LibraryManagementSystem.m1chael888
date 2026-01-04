@@ -1,5 +1,5 @@
 ﻿using Spectre.Console;
-using System.Linq;
+using static System.Reflection.Metadata.BlobBuilder;
 //// m1chael888 \\\\
 namespace LibraryManagementSystem.m1chael888
 {
@@ -25,65 +25,80 @@ namespace LibraryManagementSystem.m1chael888
                 switch (choice)
                 {
                     case MenuOption.ViewBooks:
-                        AnsiConsole.MarkupLine("[blue]List of Books:[/]\n");
-
-                        foreach (var b in books)
-                        {
-                            AnsiConsole.MarkupLine($"[blue]-[/] {b}");
-                        }
-
-                        AnsiConsole.MarkupLine("\nPress any key to return to menu...");
-                        Console.ReadKey();
+                        ViewBooks();
                         break;
                     case MenuOption.AddBook:
-                        var title = AnsiConsole.Ask<string>("[blue]Enter the [white]title[/] of the book you want to add:[/]");
-
-                        if (books.Contains(title))
-                        {
-                            AnsiConsole.MarkupLine("\n[red]That book already exists![/] =(");
-                        }
-                        else
-                        {
-                            books.Add(title);
-                            AnsiConsole.MarkupLine("\n[green]Your book has been added![/] =)");
-                        }
-
-                        AnsiConsole.MarkupLine("\nPress any key to return to menu...");
-                        Console.ReadKey();
+                        AddBook();
                         break;
                     case MenuOption.DeleteBook:
-                        if (books.Count() == 0)
-                        {
-                            AnsiConsole.MarkupLine("[red]There are no books to delete![/]");
-
-                            AnsiConsole.MarkupLine("\nPress any key to return to menu...");
-                            Console.ReadKey();
-                        }
-
-                        var bookToDelete = AnsiConsole.Prompt(
-                            new SelectionPrompt<string>()
-                            .Title("[blue]Select a book to delete[/]")
-                            .AddChoices(books)
-                            .WrapAround(true)
-                            .PageSize(25));
-
-                        if (books.Remove(bookToDelete))
-                        {
-                            AnsiConsole.MarkupLine("[green]Book successfuly deleted![/] =)");
-                        }
-                        else
-                        {
-                            AnsiConsole.MarkupLine("[red]Book not found![/] =(");
-                        }
-
-                        AnsiConsole.MarkupLine("\nPress any key to return to menu...");
-                        Console.ReadKey();
+                        DeleteBook();
                         break;
                     case MenuOption.CloseApp:
                         AnsiConsole.MarkupLine("[blue]Goodbye[/] o/");
                         Environment.Exit(0);
                         break;
                 }
+            }
+
+            void ViewBooks()
+            {
+                AnsiConsole.MarkupLine("[blue]List of Books:[/]\n");
+
+                foreach (var b in books)
+                {
+                    AnsiConsole.MarkupLine($"[blue]-[/] {b}");
+                }
+
+                AnsiConsole.MarkupLine("\nPress any key to return to menu...");
+                Console.ReadKey();
+            }
+
+            void AddBook()
+            {
+                var title = AnsiConsole.Ask<string>("[blue]Enter the [white]title[/] of the book you want to add:[/]");
+
+                if (books.Contains(title))
+                {
+                    AnsiConsole.MarkupLine("\n[red]That book already exists![/] =(");
+                }
+                else
+                {
+                    books.Add(title);
+                    AnsiConsole.MarkupLine("\n[green]Your book has been added![/] =)");
+                }
+
+                AnsiConsole.MarkupLine("\nPress any key to return to menu...");
+                Console.ReadKey();
+            }
+
+            void DeleteBook()
+            {
+                if (books.Count() == 0)
+                {
+                    AnsiConsole.MarkupLine("[red]There are no books to delete![/]");
+
+                    AnsiConsole.MarkupLine("\nPress any key to return to menu...");
+                    Console.ReadKey();
+                }
+
+                var bookToDelete = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                    .Title("[blue]Select a book to delete[/]")
+                    .AddChoices(books)
+                    .WrapAround(true)
+                    .PageSize(25));
+
+                if (books.Remove(bookToDelete))
+                {
+                    AnsiConsole.MarkupLine("[green]Book successfuly deleted![/] =)");
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine("[red]Book not found![/] =(");
+                }
+
+                AnsiConsole.MarkupLine("\nPress any key to return to menu...");
+                Console.ReadKey();
             }
         }
 
@@ -95,4 +110,4 @@ namespace LibraryManagementSystem.m1chael888
             CloseApp
         }
     }
-}
+} 
