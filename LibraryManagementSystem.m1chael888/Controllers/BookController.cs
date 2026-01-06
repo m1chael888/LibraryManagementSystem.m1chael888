@@ -3,7 +3,7 @@ using LibraryManagementSystem.m1chael888.Models;
 
 namespace LibraryManagementSystem.m1chael888.Controllers
 {
-    internal class BooksController : BaseController
+    internal class BooksController : BaseController, IBaseController
     {
         public void ViewItems()
         {
@@ -46,13 +46,13 @@ namespace LibraryManagementSystem.m1chael888.Controllers
 
             if (MockDatabase.LibraryItems.FirstOrDefault(x => x.Name.ToLower() == title.ToLower(), null) != null)
             {
-                AnsiConsole.MarkupLine("\n[red]That book already exists![/] =(");
+                DisplayMessage("\nThat book already exists! =(", "red");
             }
             else
             {
                 var newBook = new Book(MockDatabase.LibraryItems.Count + 1, title, author, category, location, pages);
                 MockDatabase.LibraryItems.Add(newBook);
-                AnsiConsole.MarkupLine("\n[green]Your book has been added![/] =)");
+                DisplayMessage("\nYour book has been added! =)", "green");
             }
 
             AnsiConsole.MarkupLine("\nPress any key to return to menu...");
@@ -64,7 +64,7 @@ namespace LibraryManagementSystem.m1chael888.Controllers
 
             if (MockDatabase.LibraryItems.OfType<Book>().Count() == 0)
             {
-                AnsiConsole.MarkupLine("[red]There are no books to delete![/]");
+                DisplayMessage("There are no books to delete!", "red");
 
                 AnsiConsole.MarkupLine("\nPress any key to return to menu...");
                 Console.ReadKey();
@@ -80,11 +80,11 @@ namespace LibraryManagementSystem.m1chael888.Controllers
 
             if (MockDatabase.LibraryItems.Remove(bookToDelete))
             {
-                AnsiConsole.MarkupLine("[green]Book successfuly deleted![/] =)");
+                DisplayMessage("Book successfuly deleted! =)", "green");
             }
             else
             {
-                AnsiConsole.MarkupLine("[red]Book not found![/] =(");
+                DisplayMessage("[red]Book not found! =(", "red");
             }
 
             AnsiConsole.MarkupLine("\nPress any key to return to menu...");

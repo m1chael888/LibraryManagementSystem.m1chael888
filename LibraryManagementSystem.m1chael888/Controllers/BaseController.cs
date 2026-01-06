@@ -1,12 +1,15 @@
-﻿namespace LibraryManagementSystem.m1chael888.Controllers
+﻿using Spectre.Console;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace LibraryManagementSystem.m1chael888.Controllers
 {
-    internal class BaseController
+    internal abstract class BaseController
     {
-        internal interface IBaseController
+        protected void DisplayMessage(string message, string color = "white")
         {
-            void ViewItems();
-            void AddItem();
-            void DeleteItem();
+            AnsiConsole.MarkupLine($"[{color}]{message}[/]");
         }
     }
 }

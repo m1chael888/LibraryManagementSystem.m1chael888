@@ -3,7 +3,7 @@ using LibraryManagementSystem.m1chael888.Models;
 
 namespace LibraryManagementSystem.m1chael888.Controllers
 {
-    internal class NewspaperController : BaseController
+    internal class NewspaperController : IBaseController
     {
         public void ViewItems()
         {
