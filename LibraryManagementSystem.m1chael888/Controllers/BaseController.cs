@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LibraryManagementSystem.m1chael888.Controllers
+﻿namespace LibraryManagementSystem.m1chael888.Controllers
 {
     internal class BaseController
     {

@@ -1,5 +1,5 @@
 ﻿using Spectre.Console;
-using static LibraryManagementSystem.m1chael888.Models;
+using LibraryManagementSystem.m1chael888.Models;
 
 namespace LibraryManagementSystem.m1chael888.Controllers
 {
@@ -46,13 +46,13 @@ namespace LibraryManagementSystem.m1chael888.Controllers
 
             if (MockDatabase.LibraryItems.OfType<Magazine>().Any(m => m.Name.Equals(title, StringComparison.OrdinalIgnoreCase)))
             {
-                AnsiConsole.MarkupLine("[red]This magazine already exists![/] =(");
+                AnsiConsole.MarkupLine("\n[red]This magazine already exists![/] =(");
             }
             else
             {
                 var newMagazine = new Magazine(MockDatabase.LibraryItems.Count + 1, title, publisher, publishDate, location, issueNumber);
                 MockDatabase.LibraryItems.Add(newMagazine);
-                AnsiConsole.MarkupLine("[green]Magazine added successfully![/] =)");
+                AnsiConsole.MarkupLine("\n[green]Magazine added successfully![/] =)");
             }
 
             AnsiConsole.MarkupLine("\nPress any key to return to menu...");
