@@ -1,7 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using static LibraryManagementSystem.m1chael888.UserInterface;
-
-namespace LibraryManagementSystem.m1chael888
+﻿namespace LibraryManagementSystem.m1chael888
 {
     internal class Program
     {
