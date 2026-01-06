@@ -1,4 +1,5 @@
-﻿using static LibraryManagementSystem.m1chael888.UserInterface;
+﻿using System.Runtime.CompilerServices;
+using static LibraryManagementSystem.m1chael888.UserInterface;
 
 namespace LibraryManagementSystem.m1chael888
 {
@@ -6,7 +7,8 @@ namespace LibraryManagementSystem.m1chael888
     {
         static void Main(string[] args)
         {
-            MainMenu();
+            var userInterface = new UserInterface();
+            userInterface.MainMenu();
         }
     }
 } 
